@@ -11,15 +11,17 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
   TextEditingController emailcontroller = TextEditingController();
 
   TextEditingController passwordcontroller = TextEditingController();
-    bool isloading=false;
+  bool isloading = false;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(backgroundColor: Colors.white,),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -49,7 +51,6 @@ class _LoginPageState extends State<LoginPage> {
             ),
             SizedBox(height: 15),
             // Email TextField
-           
 
             // Password TextField
             TextField(
@@ -70,48 +71,57 @@ class _LoginPageState extends State<LoginPage> {
             ),
             SizedBox(height: 40),
             // Confirm Password TextField
-           
+
             // Sign Up Button
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 fixedSize: Size(MediaQuery.of(context).size.width, 50),
                 backgroundColor: Color.fromARGB(255, 127, 32, 156),
               ),
-              onPressed: () async{
+              onPressed: () async {
                 setState(() {
-                  isloading=true;
+                  isloading = true;
                 });
-                await login(email: emailcontroller.text, password: passwordcontroller.text,context: context);
- setState(() {
-                  isloading=false;
+                await login(
+                    email: emailcontroller.text,
+                    password: passwordcontroller.text,
+                    context: context);
+                setState(() {
+                  isloading = false;
                 });
                 // Sign-up logic here
               },
-              child:isloading?CircularProgressIndicator(): Text(
-                'Login',
-                
-                style: TextStyle(color: Colors.white),
-              ),
-              
-              
+              child: isloading
+                  ? CircularProgressIndicator()
+                  : Text(
+                      'Login',
+                      style: TextStyle(color: Colors.white),
+                    ),
             ),
             SizedBox(height: 15),
-           
 
-                
-                Padding(
-                  padding: const EdgeInsets.only(left: 85),
-                  child: Row(children: [
-                    Text('Dont have an account?',style: TextStyle(fontWeight: FontWeight.bold),),
-                                SizedBox(width: 15),
-
-                    GestureDetector(
-                      onTap: (){
+            Padding(
+              padding: const EdgeInsets.only(left: 85),
+              child: Row(
+                children: [
+                  Text(
+                    'Dont have an account?',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(width: 15),
+                  GestureDetector(
+                      onTap: () {
                         Navigator.pop(context);
                       },
-                      child: Text('Sign Up',style: TextStyle(color: const Color.fromARGB(255, 214, 64, 255),fontWeight: FontWeight.bold),))
-                  ],),
-                )
+                      child: Text(
+                        'Sign Up',
+                        style: TextStyle(
+                            color: const Color.fromARGB(255, 214, 64, 255),
+                            fontWeight: FontWeight.bold),
+                      ))
+                ],
+              ),
+            )
           ],
         ),
       ),

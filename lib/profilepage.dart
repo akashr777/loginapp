@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,10 +17,14 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   // Dummy data for profile
-  TextEditingController _usernameController = TextEditingController(text: 'Akash');
-  TextEditingController _emailController = TextEditingController(text: 'akash@gmail.com');
-  TextEditingController _phoneController = TextEditingController(text: '7034579250');
-  TextEditingController _passwordController = TextEditingController(text: '********');
+  TextEditingController _usernameController = TextEditingController(
+      text: FirebaseAuth.instance.currentUser?.email??'Name');
+  TextEditingController _emailController =
+      TextEditingController(text: 'akash@gmail.com');
+  TextEditingController _phoneController =
+      TextEditingController(text: '7034579250');
+  TextEditingController _passwordController =
+      TextEditingController(text: '********');
 
   bool _isEditable = false;
 
@@ -77,7 +82,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
             SizedBox(height: 10),
-            
+
             // Divider with color
             Divider(
               indent: 80,
@@ -106,7 +111,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   fixedSize: Size(MediaQuery.of(context).size.width * 0.8, 50),
-                  backgroundColor: Colors.purple,  // Use backgroundColor instead of primary
+                  backgroundColor:
+                      Colors.purple, // Use backgroundColor instead of primary
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
@@ -151,7 +157,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         child: TextField(
           controller: controller,
-          enabled: isEditable,  // Toggle editability
+          enabled: isEditable, // Toggle editability
           decoration: InputDecoration(
             labelText: label,
             labelStyle: TextStyle(color: Colors.purple),
@@ -183,8 +189,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         child: TextField(
           controller: _passwordController,
-          obscureText: true,  // Hide password text
-          enabled: _isEditable,  // Toggle editability
+          obscureText: true, // Hide password text
+          enabled: _isEditable, // Toggle editability
           decoration: InputDecoration(
             labelText: 'Password',
             labelStyle: TextStyle(color: Colors.purple),
